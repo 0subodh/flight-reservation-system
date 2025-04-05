@@ -15,3 +15,7 @@ Lets take a look inside the `src` folder
 - `services` -> contains the business logic and interacts with repositories for data from the database
 
 - `utils` -> contains helper methods, error classes, etc.
+
+Connect to mysql : sudo mysql -u root -p (enter) prompt for password
+
+migrations put database level constraints, but model put Javascript level constraints
