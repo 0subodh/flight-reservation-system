@@ -1,3 +1,7 @@
-import { createAirplane, getAllAirplanes } from './airplane.service.js'
+import {
+  createAirplane,
+  getAllAirplanes,
+  getAirplane,
+} from './airplane.service.js'
 
-export { createAirplane, getAllAirplanes }
+export { createAirplane, getAllAirplanes, getAirplane }

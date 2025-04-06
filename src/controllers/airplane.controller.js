@@ -2,6 +2,7 @@ import { StatusCodes } from 'http-status-codes'
 import {
   createAirplane as createAirplaneService,
   getAllAirplanes as getAllAirplanesService,
+  getAirplane as getAirplaneService,
 } from '../services/index.js'
 import {
   error as ErrorResponse,
@@ -51,6 +52,25 @@ export async function getAllAirplanes(req, res) {
   } catch (error) {
     ErrorResponse.error = error
     ErrorResponse.message = 'Something went wrong while fetching airplanes'
+
+    // prettier-ignore
+    return res
+      .status(error.statusCode)
+      .json(ErrorResponse)
+  }
+}
+
+export async function getAirplane(req, res) {
+  try {
+    const airplane = await getAirplaneService(req.params.id)
+
+    SuccessResponse.data = airplane
+    SuccessResponse.message = 'Airplane fetched successfully'
+
+    return res.status(StatusCodes.OK).json(SuccessResponse)
+  } catch (error) {
+    ErrorResponse.error = error
+    ErrorResponse.message = 'Something went wrong while fetching airplane'
 
     // prettier-ignore
     return res

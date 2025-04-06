@@ -31,3 +31,22 @@ export async function getAllAirplanes() {
     )
   }
 }
+
+export async function getAirplane(id) {
+  try {
+    const airplane = await airplaneRepository.get(id)
+
+    return airplane
+  } catch (error) {
+    if (error.statusCode === StatusCodes.NOT_FOUND) {
+      throw new AppError(
+        'The airplane you requested does not exist',
+        StatusCodes.NOT_FOUND
+      )
+    }
+    throw new AppError(
+      'Cannot fetch airplane',
+      StatusCodes.INTERNAL_SERVER_ERROR
+    )
+  }
+}
