@@ -1,4 +1,4 @@
-import { info } from "./info.controller.js";
-import { createAirplane } from "./airplane.controller.js";
+import { info } from './info.controller.js'
+import { createAirplane, getAllAirplanes } from './airplane.controller.js'
 
-export { info, createAirplane };
+export { info, createAirplane, getAllAirplanes }

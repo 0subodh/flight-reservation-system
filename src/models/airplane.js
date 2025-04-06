@@ -1,5 +1,5 @@
-"use strict";
-import { Model, DataTypes } from "sequelize";
+'use strict'
+import { Model, DataTypes } from 'sequelize'
 
 export default (sequelize) => {
   class Airplane extends Model {
@@ -10,14 +10,27 @@ export default (sequelize) => {
 
   Airplane.init(
     {
-      modelNumber: { type: DataTypes.STRING, allowNull: false },
-      capacity: { type: DataTypes.INTEGER, allowNull: false },
+      modelNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isAlphanumeric: true,
+        },
+      },
+      capacity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+        validate: {
+          max: 1000,
+        },
+      },
     },
     {
       sequelize,
-      modelName: "Airplane",
+      modelName: 'Airplane',
     }
-  );
+  )
 
-  return Airplane;
-};
+  return Airplane
+}

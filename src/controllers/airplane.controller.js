@@ -1,5 +1,12 @@
-import { StatusCodes } from "http-status-codes";
-import { createAirplane as createAirplaneService } from "../services/index.js";
+import { StatusCodes } from 'http-status-codes'
+import {
+  createAirplane as createAirplaneService,
+  getAllAirplanes as getAllAirplanesService,
+} from '../services/index.js'
+import {
+  error as ErrorResponse,
+  success as SuccessResponse,
+} from '../utils/index.js'
 
 /**
  * POST :/airplanes
@@ -10,19 +17,44 @@ export async function createAirplane(req, res) {
     const airplane = await createAirplaneService({
       modelNumber: req.body.modelNumber,
       capacity: req.body.capacity,
-    });
-    return res.status(StatusCodes.CREATED).json({
-      success: true,
-      message: "Airplane created successfully",
-      error: {},
-      data: airplane,
-    });
+    })
+
+    SuccessResponse.data = airplane
+    SuccessResponse.message = 'Airplane created successfully'
+
+    // prettier-ignore
+    return res
+      .status(StatusCodes.CREATED)
+      .json(SuccessResponse);
   } catch (error) {
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      success: false,
-      message: "Something went wrong",
-      error: error,
-      data: {},
-    });
+    ErrorResponse.error = error
+    ErrorResponse.message = 'Something went wrong while creating airplane'
+
+    // prettier-ignore
+    return res
+      .status(error.statusCode)
+      .json(ErrorResponse);
+  }
+}
+
+export async function getAllAirplanes(req, res) {
+  try {
+    const airplanes = await getAllAirplanesService()
+
+    SuccessResponse.data = airplanes
+    SuccessResponse.message = 'Airplanes fetched successfully'
+
+    // prettier-ignore
+    return res
+      .status(StatusCodes.OK)
+      .json(SuccessResponse)
+  } catch (error) {
+    ErrorResponse.error = error
+    ErrorResponse.message = 'Something went wrong while fetching airplanes'
+
+    // prettier-ignore
+    return res
+      .status(error.statusCode)
+      .json(ErrorResponse)
   }
 }

@@ -1,8 +1,8 @@
-"use strict";
+'use strict'
 /** @type {import('sequelize-cli').Migration} */
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Airplanes", {
+    await queryInterface.createTable('Airplanes', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,6 +16,9 @@ export default {
       capacity: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        validate: {
+          max: 1000,
+        },
       },
       createdAt: {
         allowNull: false,
@@ -25,9 +28,9 @@ export default {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    });
+    })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Airplanes");
+    await queryInterface.dropTable('Airplanes')
   },
-};
+}

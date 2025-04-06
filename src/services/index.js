@@ -1,3 +1,3 @@
-import { createAirplane } from "./airplane.service.js";
+import { createAirplane, getAllAirplanes } from './airplane.service.js'
 
-export { createAirplane };
+export { createAirplane, getAllAirplanes }
