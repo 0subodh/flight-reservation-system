@@ -43,6 +43,9 @@ export class CrudRepository {
         id: id,
       },
     })
+    if (response[0] === 0) {
+      throw new AppError('Not able to found a resource', StatusCodes.NOT_FOUND)
+    }
     return response
   }
 }

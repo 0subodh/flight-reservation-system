@@ -4,6 +4,14 @@ import {
   getAllAirplanes,
   getAirplane,
   destroyAirplane,
+  updateAirplane,
 } from './airplane.controller.js'
 
-export { info, createAirplane, getAllAirplanes, getAirplane, destroyAirplane }
+export {
+  info,
+  createAirplane,
+  getAllAirplanes,
+  getAirplane,
+  destroyAirplane,
+  updateAirplane,
+}

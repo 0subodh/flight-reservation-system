@@ -4,6 +4,7 @@ import {
   getAllAirplanes as getAllAirplanesService,
   getAirplane as getAirplaneService,
   destroyAirplane as destroyAirplaneService,
+  updateAirplane as updateAirplaneService,
 } from '../services/index.js'
 import {
   error as ErrorResponse,
@@ -94,6 +95,28 @@ export async function destroyAirplane(req, res) {
   } catch (error) {
     ErrorResponse.error = error
     ErrorResponse.message = 'Something went wrong while deleting airplane'
+
+    // prettier-ignore
+    return res
+    .status(error.statusCode)
+    .json(ErrorResponse)
+  }
+}
+
+export async function updateAirplane(req, res) {
+  try {
+    const response = await updateAirplaneService(req.params.id, req.body)
+
+    SuccessResponse.data = response
+    SuccessResponse.message = 'Airplane updated successfully'
+
+    // prettier-ignore
+    return res
+      .status(StatusCodes.OK)
+      .json(SuccessResponse)
+  } catch (error) {
+    ErrorResponse.error = error
+    ErrorResponse.message = 'Something went wrong while updating airplane'
 
     // prettier-ignore
     return res
