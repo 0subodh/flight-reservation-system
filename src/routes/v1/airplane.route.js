@@ -3,6 +3,7 @@ import {
   createAirplane,
   getAllAirplanes,
   getAirplane,
+  destroyAirplane,
 } from '../../controllers/index.js'
 import { validateCreateRequest } from '../../middlewares/index.js'
 
@@ -16,5 +17,8 @@ router.get('/', getAllAirplanes)
 
 // GET /api/v1/airplanes/:id
 router.get('/:id', getAirplane)
+
+// DELETE /api/v1/airplanes/:id
+router.delete('/:id', destroyAirplane)
 
 export default router
