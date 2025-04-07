@@ -1,7 +1,7 @@
 'use strict'
-import { Model } from 'sequelize'
+import { Model, DataTypes } from 'sequelize'
 
-export default (sequelize, DataTypes) => {
+export default (sequelize) => {
   class City extends Model {
     /**
      * Helper method for defining associations.
