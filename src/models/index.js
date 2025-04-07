@@ -17,7 +17,7 @@ const sequelize = new Sequelize(
 const Airplane = AirplaneModel(sequelize) // ✅
 const City = CityModel(sequelize)
 const Airport = AirportModel(sequelize)
-const Flight = FlightModel
+const Flight = FlightModel(sequelize)
 
 // CALL the function to initialize the model
 

@@ -1,6 +1,6 @@
 'use strict'
-const { Model } = require('sequelize')
-module.exports = (sequelize, DataTypes) => {
+import { Model, DataTypes } from 'sequelize'
+export default (sequelize) => {
   class Flight extends Model {
     /**
      * Helper method for defining associations.
@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'airplaneId',
       })
       Flight.belongsTo(models.Airport, {
-        foreignKey: 'code',
+        foreignKey: 'departureAirportId',
       })
       Flight.belongsTo(models.Airport, {
-        foreignKey: 'code',
+        foreignKey: 'arrivalAirportId',
       })
     }
   }
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       arrivalTime: { type: DataTypes.DATE, allowNull: false },
       departureTime: { type: DataTypes.DATE, allowNull: false },
       price: { type: DataTypes.INTEGER, allowNull: false },
-      boardingGate: { type: DataTypes.STRING, allowNull: false },
+      boardingGate: { type: DataTypes.STRING, allowNull: true },
       totalSeats: { type: DataTypes.INTEGER, allowNull: false },
     },
     {

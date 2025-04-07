@@ -13,7 +13,7 @@ import {
 } from '../utils/index.js'
 
 /**
- * POST :/airplanes
+ * POST :/airports
  * req-body {name: '', code: '', address: '', city_id: ''}
  */
 export async function createAirport(req, res) {
