@@ -11,8 +11,14 @@ export default (sequelize) => {
       // define association here
       Airport.belongsTo(models.City, {
         foreignKey: 'city_id',
+      })
+      Airport.hasMany(models.Flight, {
+        foreignKey: 'departureAirportId',
         onDelete: 'cascade',
-        onUpdate: 'cascade',
+      })
+      Airport.hasMany(models.Flight, {
+        foreignKey: 'arrivalAirportId',
+        onDelete: 'cascade',
       })
     }
   }

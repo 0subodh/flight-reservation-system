@@ -5,6 +5,18 @@ export default (sequelize) => {
   class Airplane extends Model {
     static associate(models) {
       // define association here
+      Airplane.hasMany(models.Fligths, {
+        foreignKey: 'airplaneId',
+        onDelete: 'cascade',
+      })
+      Airplane.belongsTo(models.Airport, {
+        foreignKey: 'departureAirportId',
+        onDelete: 'cascade',
+      })
+      Airplane.belongsTo(models.Airport, {
+        foreignKey: 'arrivalAirportId',
+        onDelete: 'cascade',
+      })
     }
   }
 

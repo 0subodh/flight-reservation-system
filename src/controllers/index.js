@@ -15,6 +15,15 @@ import {
   updateCity,
 } from './city.controller.js'
 
+import {
+  createAirport,
+  getAllAirports,
+  getAirport,
+  destroyAirport,
+  updateAirport,
+} from './airport.controller.js'
+
+export {}
 export {
   info,
   createAirplane,
@@ -27,4 +36,9 @@ export {
   getCity,
   destroyCity,
   updateCity,
+  createAirport,
+  getAllAirports,
+  getAirport,
+  destroyAirport,
+  updateAirport,
 }

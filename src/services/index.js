@@ -14,6 +14,14 @@ import {
   updateCity,
 } from './city.service.js'
 
+import {
+  createAirport,
+  getAllAirports,
+  getAirport,
+  destroyAirport,
+  updateAirport,
+} from './airport.service.js'
+
 export {
   createAirplane,
   getAllAirplanes,
@@ -25,4 +33,9 @@ export {
   getCity,
   destroyCity,
   updateCity,
+  createAirport,
+  getAllAirports,
+  getAirport,
+  destroyAirport,
+  updateAirport,
 }
