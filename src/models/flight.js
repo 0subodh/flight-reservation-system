@@ -30,7 +30,7 @@ export default (sequelize) => {
       departureTime: { type: DataTypes.DATE, allowNull: false },
       price: { type: DataTypes.INTEGER, allowNull: false },
       boardingGate: { type: DataTypes.STRING, allowNull: true },
-      totalSeats: { type: DataTypes.INTEGER, allowNull: false },
+      totalSeats: { type: DataTypes.INTEGER, allowNull: false }, // total remaining seats
     },
     {
       sequelize,

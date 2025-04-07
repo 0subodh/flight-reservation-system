@@ -1,5 +1,8 @@
 import { StatusCodes } from 'http-status-codes'
-import { createFlight as createFlightService } from '../services/index.js'
+import {
+  createFlight as createFlightService,
+  getAllFlights as getAllFlightsService,
+} from '../services/index.js'
 
 import {
   error as ErrorResponse,
@@ -49,6 +52,24 @@ export async function createFlight(req, res) {
     // prettier-ignore
     return res
       .status(error.statusCode)
+      .json(ErrorResponse);
+  }
+}
+
+export async function getAllFlights(req, res) {
+  try {
+    const flights = await getAllFlightsService(req.query)
+    SuccessResponse.data = flights
+    SuccessResponse.message = 'Flights fetched successfully'
+
+    return res.status(StatusCodes.OK).json(SuccessResponse)
+  } catch (error) {
+    ErrorResponse.error = error
+    ErrorResponse.message = 'Something went wrong while creating flight'
+
+    // prettier-ignore
+    return res
+      .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
       .json(ErrorResponse);
   }
 }

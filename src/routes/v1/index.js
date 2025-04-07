@@ -11,7 +11,6 @@ router.use('/airplanes', airplaneRoutes)
 router.use('/cities', cityRoutes)
 router.use('/airports', airportRoutes)
 router.use('/flights', flightRoutes)
-
 router.get('/info', info)
 
 export default router

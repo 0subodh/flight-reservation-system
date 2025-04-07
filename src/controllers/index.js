@@ -23,7 +23,7 @@ import {
   updateAirport,
 } from './airport.controller.js'
 
-import { createFlight } from './flight.controller.js'
+import { createFlight, getAllFlights } from './flight.controller.js'
 
 export {}
 export {
@@ -44,4 +44,5 @@ export {
   destroyAirport,
   updateAirport,
   createFlight,
+  getAllFlights,
 }

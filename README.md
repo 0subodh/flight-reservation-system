@@ -1,21 +1,112 @@
-`src` -> Inside the source folder all the actual source code regarding the project will reside, this will not include any kind of tests.
+# Flight Reservation System
 
-Lets take a look inside the `src` folder
+This project is a RESTful API for a Flight Reservation System built using
+Node.js, Express.js, and Sequelize ORM with a MySQL database. It allows users to
+manage airplanes, cities, airports, and flights, including creating, retrieving,
+updating, and deleting these resources.
 
-- `config` -> in this folder, anything or everything regarding any configuration or setup of a library or module will be done. For example: seeting up `dotenv` so that we can use the environment variables anywhere in a cleaner fashion, this is down in the `server.config.js`. One more example can be to setup logging library that help you to prepare meaningful logs, so configuration for this library shoudl be done here.
+## Features
 
-- `routes` -> In this folder, we register a route and the corresponding middleware and controllers to it.
+- **Manage Airplanes:**
+  - Create new airplanes with model numbers and capacities.
+  - Retrieve a list of all airplanes.
+  - Retrieve details of a specific airplane.
+  - Update existing airplane information.
+  - Delete airplanes.
+- **Manage Cities:**
+  - Create new cities.
+  - Retrieve a list of all cities.
+  - Retrieve details of a specific city.
+  - Update existing city information.
+  - Delete cities.
+- **Manage Airports:**
+  - Create new airports with names, codes, addresses, and associated cities.
+  - Retrieve a list of all airports.
+  - Retrieve details of a specific airport.
+  - Update existing airport information.
+  - Delete airports.
+- **Manage Flights:**
+  - Create new flights with flight numbers, airplane IDs, departure and arrival
+    airport IDs, arrival and departure times, prices, boarding gates, and total
+    seats.
+  - Retrieve a list of all flights.
+  - Filter flights based on departure and arrival airports.
+- **Validation:**
+  - Input validation for all create and update operations.
+  - Checks for required fields and data types.
+  - Ensures departure time is before arrival time for flights.
+- **Error Handling:**
+  - Robust error handling with custom error responses.
+  - Specific error messages for validation failures, resource not found, and
+    other issues.
+- **Database:**
+  - MySQL database for persistent data storage.
+  - Sequelize ORM for database interactions.
+  - Migrations for database schema management.
+- **Logging:**
+  - Winston for logging.
 
-- `middlewares` -> they are just going to intercept the incoming requests where we can write our validators, authenticators, etc.
+## Technologies Used
 
-- `controllers` -> they are kind fo the last middleware as post them you call the business layer to execute the business logic. In controllers we just receive the incoming requests and data and then pass it to the business layer, and once business layer returns the output, we structure the API response in controllers and send the output.
+- **Node.js:** JavaScript runtime environment.
+- **Express.js:** Web framework for Node.js.
+- **Sequelize:** ORM for Node.js.
+- **MySQL:** Relational database management system.
+- **Winston:** Logging library.
+- **dotenv:** For managing environment variables.
+- **http-status-codes:** For HTTP status codes.
 
-- `repositories` -> this folder contains all the logic using which we interact with the Database by writing queries, all the raw queries or ORM queries will go here
+## Getting Started
 
-- `services` -> contains the business logic and interacts with repositories for data from the database
+### Prerequisites
 
-- `utils` -> contains helper methods, error classes, etc.
+- Node.js (v18 or higher)
+- MySQL server
+- NPM or Yarn
 
-Connect to mysql : sudo mysql -u root -p (enter) prompt for password
+### Installation
 
-migrations put database level constraints, but model put Javascript level constraints
+1.  **Clone the repository:**
+
+    ```bash
+    git clone <repository-url>
+    cd airline-reservation-system
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Database Setup:**
+
+    - Create a MySQL database.
+    - Create a `.env` file in the root directory and add the following
+      environment variables, replacing the placeholders with your actual
+      database credentials:
+
+      ```
+      PORT=5000
+      DB_NAME=your_database_name
+      DB_USER=your_database_user
+      DB_PASSWORD=your_database_password
+      DB_HOST=localhost
+      ```
+
+4.  **Run Migrations:**
+
+    ```bash
+    npx sequelize-cli db:migrate
+    ```
+
+5.  **Run Seeders**
+    ```bash
+    npx sequelize-cli db:seed:all
+    ```
+
+### Running the Application
+
+```bash
+npm start
+```
