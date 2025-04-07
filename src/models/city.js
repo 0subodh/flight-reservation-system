@@ -10,6 +10,11 @@ export default (sequelize) => {
      */
     static associate(models) {
       // define association here
+      City.hasMany(models.Airport, {
+        foreignKey: 'city_id',
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+      })
     }
   }
   City.init(
