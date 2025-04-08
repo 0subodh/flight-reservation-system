@@ -11,12 +11,15 @@ export default (sequelize) => {
       // define association here
       Flight.belongsTo(models.Airplane, {
         foreignKey: 'airplaneId',
+        as: 'airplaneDetail',
       })
       Flight.belongsTo(models.Airport, {
         foreignKey: 'departureAirportId',
+        as: 'departureAirport',
       })
       Flight.belongsTo(models.Airport, {
         foreignKey: 'arrivalAirportId',
+        as: 'arrivalAirport',
       })
     }
   }
