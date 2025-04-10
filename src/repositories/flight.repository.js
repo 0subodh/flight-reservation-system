@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize'
 import { CrudRepository } from './crud.repository.js'
 import db from '../models/index.js'
+import { addRowLockOnFlights } from './queries.js'
 
 export class FlightRepository extends CrudRepository {
   constructor() {
@@ -36,12 +37,12 @@ export class FlightRepository extends CrudRepository {
         {
           model: db.Airport,
           required: true,
-          as: 'departureAirport',
+          as: 'arrivalAirport',
           on: {
             col1: Sequelize.where(
               Sequelize.col('Flight.arrivalAirportId'),
               '=',
-              Sequelize.col('arrivalAirportId.code')
+              Sequelize.col('arrivalAirport.code')
             ),
           },
           include: {
@@ -52,5 +53,21 @@ export class FlightRepository extends CrudRepository {
       ],
     })
     return response
+  }
+
+  async updateRemainingSeats(flightId, seats, decrease = true) {
+    // Implemnets row level locking
+    await db.sequelize.query(addRowLockOnFlights(flightId))
+    const flight = await db.Flight.findByPk(flightId)
+    console.log(JSON.parse(decrease))
+    if (JSON.parse(decrease)) {
+      const response = await flight.decrement('totalSeats', {
+        by: seats,
+      })
+      return response
+    } else {
+      const response = await flight.increment('totalSeats', { by: seats })
+      return response
+    }
   }
 }

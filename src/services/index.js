@@ -22,7 +22,12 @@ import {
   updateAirport,
 } from './airport.service.js'
 
-import { createFlight, getAllFlights } from './flight.service.js'
+import {
+  createFlight,
+  getAllFlights,
+  getFlight,
+  updateSeats,
+} from './flight.service.js'
 
 export {
   createAirplane,
@@ -42,4 +47,6 @@ export {
   updateAirport,
   createFlight,
   getAllFlights,
+  getFlight,
+  updateSeats,
 }

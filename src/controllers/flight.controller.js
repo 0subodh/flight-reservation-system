@@ -2,6 +2,8 @@ import { StatusCodes } from 'http-status-codes'
 import {
   createFlight as createFlightService,
   getAllFlights as getAllFlightsService,
+  getFlight as getFlightService,
+  updateSeats as updateSeatsService,
 } from '../services/index.js'
 
 import {
@@ -71,5 +73,47 @@ export async function getAllFlights(req, res) {
     return res
       .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
       .json(ErrorResponse);
+  }
+}
+
+export async function getFlight(req, res) {
+  try {
+    const flight = await getFlightService(req.params.id)
+
+    SuccessResponse.data = flight
+    SuccessResponse.message = 'Flight fetched successfully'
+
+    return res.status(StatusCodes.OK).json(SuccessResponse)
+  } catch (error) {
+    ErrorResponse.error = error
+    ErrorResponse.message = 'Something went wrong while fetching flight'
+
+    // prettier-ignore
+    return res
+      .status(error.statusCode)
+      .json(ErrorResponse)
+  }
+}
+
+export async function updateSeats(req, res) {
+  try {
+    const response = await updateSeatsService({
+      flightId: req.params.id,
+      seats: req.body.seats,
+      decrease: req.body.decrease,
+    })
+
+    SuccessResponse.data = response
+    SuccessResponse.message = 'Flight seats updated successfully'
+
+    return res.status(StatusCodes.OK).json(SuccessResponse)
+  } catch (error) {
+    ErrorResponse.error = error
+    ErrorResponse.message = 'Something went wrong while fetching flight'
+
+    // prettier-ignore
+    return res
+      .status(error.statusCode)
+      .json(ErrorResponse)
   }
 }

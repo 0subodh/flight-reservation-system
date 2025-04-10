@@ -1,6 +1,14 @@
 import express from 'express'
-import { createFlight, getAllFlights } from '../../controllers/index.js'
-import { validateCreateFlightRequest } from '../../middlewares/index.js'
+import {
+  createFlight,
+  getAllFlights,
+  getFlight,
+  updateSeats,
+} from '../../controllers/index.js'
+import {
+  validateCreateFlightRequest,
+  validateUpdateSeatsRequest,
+} from '../../middlewares/index.js'
 
 const router = express.Router()
 
@@ -9,5 +17,11 @@ router.post('/', validateCreateFlightRequest, createFlight)
 
 // GET /api/v1/flights?trips=KTM-CHI
 router.get('/', getAllFlights)
+
+// GET /api/v1/flights/:id
+router.get('/:id', getFlight)
+
+// PATCH /api/v1/flights/:id/seats
+router.patch('/:id/seats', validateUpdateSeatsRequest, updateSeats)
 
 export default router

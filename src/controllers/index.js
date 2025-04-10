@@ -23,7 +23,12 @@ import {
   updateAirport,
 } from './airport.controller.js'
 
-import { createFlight, getAllFlights } from './flight.controller.js'
+import {
+  createFlight,
+  getAllFlights,
+  getFlight,
+  updateSeats,
+} from './flight.controller.js'
 
 export {}
 export {
@@ -45,4 +50,6 @@ export {
   updateAirport,
   createFlight,
   getAllFlights,
+  getFlight,
+  updateSeats,
 }

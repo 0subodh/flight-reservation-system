@@ -94,3 +94,39 @@ export async function getAllFlights(query) {
     )
   }
 }
+
+export async function getFlight(id) {
+  try {
+    const flight = await flightRepository.get(id)
+
+    return flight
+  } catch (error) {
+    if (error.statusCode === StatusCodes.NOT_FOUND) {
+      throw new AppError(
+        'The airport you requested does not exist',
+        StatusCodes.NOT_FOUND
+      )
+    }
+    throw new AppError(
+      'Cannot fetch airplane',
+      StatusCodes.INTERNAL_SERVER_ERROR
+    )
+  }
+}
+
+export async function updateSeats(data) {
+  try {
+    const response = await flightRepository.updateRemainingSeats(
+      data.flightId,
+      data.seats,
+      data.decrease
+    )
+    return response
+  } catch (error) {
+    console.log(error)
+    throw new AppError(
+      'Cannot update of the flight',
+      StatusCodes.INTERNAL_SERVER_ERROR
+    )
+  }
+}
